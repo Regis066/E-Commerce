@@ -1,9 +1,10 @@
-import React, { Fragment } from 'react'
+import React, { Fragment } from 'react';
+import { Product, Footer , FooterBanner , HeroBanner, Layout, Cart, Navbar } from '@/components';
 
 const Home = () => {
   return (
     <Fragment>
-      Hello Banner
+      <HeroBanner />
 
 
       <div className='products-heading'>
@@ -15,7 +16,7 @@ const Home = () => {
       {['Product 1', 'Product 2'].map((product)=> product)}
       </div>
 
-      Footer
+     <FooterBanner />
     </Fragment>
   )
 }
