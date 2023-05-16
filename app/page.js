@@ -2,11 +2,11 @@ import React, { Fragment } from 'react';
 import { Product, Footer , FooterBanner , HeroBanner, Layout, Cart, Navbar } from '@/components';
 import { client } from '../lib/client';
 
-const Home = () => (
+const Home = ({ products, bannerData }) => (
 
   <div>
-  <HeroBanner />
-
+  <HeroBanner heroBanner/>
+  {console.log(bannerData)}
 
   <div className='products-heading'>
     <h2>Beset Selling Products</h2>
@@ -14,7 +14,8 @@ const Home = () => (
   </div>
 
   <div className='product-container'>
-  {['Product 1', 'Product 2'].map((product)=> product)}
+  {products && products.map((product)=> product)}
+  {console.log(bannerData)}
   </div>
 
  <FooterBanner />
@@ -22,7 +23,15 @@ const Home = () => (
 
 );
   export const getServerSideProps = async() =>{
+      const query = `*[_type == 'product']`;
+      const products = await client.fetch(query);
 
+      const bannerQuery = `*[_type == 'banner']`;
+      const bannerData = await client.fetch(bannerQuery);
+
+      return {
+        props : {products , bannerData}
+      }
   }
 
 export default Home
